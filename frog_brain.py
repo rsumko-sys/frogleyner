@@ -23,10 +23,12 @@ from content.leiner_quotes_ru import (
 def _days_since(iso_ts: str) -> int:
     try:
         last = dt.datetime.fromisoformat(iso_ts.replace("Z", "+00:00"))
+        if last.tzinfo is None:
+            last = last.replace(tzinfo=dt.timezone.utc)
     except Exception:
         return 999
-    now = dt.datetime.utcnow()
-    return (now - last.replace(tzinfo=None)).days
+    now = dt.datetime.now(dt.timezone.utc)
+    return (now - last).days
 
 
 def choose_mood(u) -> str:

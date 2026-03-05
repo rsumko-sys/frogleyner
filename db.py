@@ -2,6 +2,8 @@ import aiosqlite
 import datetime as dt
 from typing import Optional, Sequence, Any
 
+_UTC = dt.timezone.utc
+
 SCHEMA_SQL = """
 PRAGMA journal_mode=WAL;
 
@@ -116,7 +118,7 @@ class Database:
 
     # --- Users ---
     async def upsert_user(self, user_id: int, tz: str = "Europe/Kyiv"):
-        now = dt.datetime.utcnow().isoformat()
+        now = dt.datetime.now(_UTC).isoformat()
         await self.execute(
             """
             INSERT INTO users(user_id, tz, autopush, created_at, last_seen)
@@ -129,7 +131,7 @@ class Database:
         )
 
     async def touch_user(self, user_id: int):
-        now = dt.datetime.utcnow().isoformat()
+        now = dt.datetime.now(_UTC).isoformat()
         await self.execute("UPDATE users SET last_seen=? WHERE user_id=?", (now, user_id))
 
     async def set_autopush(self, user_id: int, enabled: bool):
@@ -161,14 +163,14 @@ class Database:
 
     # --- Water ---
     async def add_water(self, user_id: int, ml: int):
-        now = dt.datetime.utcnow().isoformat()
+        now = dt.datetime.now(_UTC).isoformat()
         await self.execute(
             "INSERT INTO water_log(user_id, ts, ml) VALUES(?, ?, ?)",
             (user_id, now, ml),
         )
 
     async def water_today_ml(self, user_id: int, tz: str) -> int:
-        today = dt.datetime.utcnow().date().isoformat()
+        today = dt.datetime.now(_UTC).date().isoformat()
         row = await self.fetchone(
             "SELECT COALESCE(SUM(ml),0) AS s FROM water_log WHERE user_id=? AND substr(ts,1,10)=?",
             (user_id, today),
@@ -211,14 +213,14 @@ class Database:
         return await self.fetchone("SELECT * FROM jokes ORDER BY RANDOM() LIMIT 1")
 
     async def add_reaction(self, user_id: int, item_type: str, item_id: Optional[int], reaction: str):
-        now = dt.datetime.utcnow().isoformat()
+        now = dt.datetime.now(_UTC).isoformat()
         await self.execute(
             "INSERT INTO reactions(user_id, ts, item_type, item_id, reaction) VALUES(?,?,?,?,?)",
             (user_id, now, item_type, item_id, reaction),
         )
 
     async def add_training_log(self, user_id: int, kind: str, note: Optional[str] = None):
-        now = dt.datetime.utcnow().isoformat()
+        now = dt.datetime.now(_UTC).isoformat()
         await self.execute(
             "INSERT INTO training_log(user_id, ts, kind, note) VALUES(?,?,?,?)",
             (user_id, now, kind, note),
