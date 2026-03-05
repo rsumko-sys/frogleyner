@@ -119,7 +119,7 @@ async def build_dataset(n: int = 200, seed_val: int = 42) -> list[dict]:
 
 
 async def main():
-    out_path = Path(__file__).resolve().parent.parent / "frog_species_200.json"
+    out_path = Path(__file__).resolve().parent / "frog_species_200.json"
     frogs = await build_dataset(n=200)
     print(f"Generated: {len(frogs)} frogs")
     with open(out_path, "w", encoding="utf-8") as f:

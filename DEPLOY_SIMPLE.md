@@ -5,14 +5,14 @@
 1. **Репо на GitHub**  
    Якщо ще немає:
    ```bash
-   cd /Users/admin/frogbot
+   cd frogleyner
    git init
    git add .
    git commit -m "bot"
    ```
    На [github.com](https://github.com) створи новий репо (наприклад `frogbot`), потім:
    ```bash
-   git remote add origin https://github.com/TVІЙ_LOGIN/frogbot.git
+   git remote add origin https://github.com/YOUR_USERNAME/frogleyner.git
    git branch -M main
    git push -u origin main
    ```

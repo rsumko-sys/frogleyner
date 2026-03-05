@@ -292,6 +292,7 @@ async def cb_water(c: CallbackQuery, db: Database):
         return
     ml = int(c.data.split(":")[1])
     uid = c.from_user.id
+    await db.upsert_user(uid)
     await db.add_water(uid, ml)
     await c.answer("Записала. Ква.")
     u = await db.get_user(uid)

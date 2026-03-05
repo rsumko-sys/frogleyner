@@ -4,34 +4,61 @@ Telegram-бот на Python 3.11+: aiogram v3, APScheduler, SQLite (aiosqlite).
 
 ## Запуск
 
+### Варіант A: локально (Python)
+
 1. Створи бота в [@BotFather](https://t.me/BotFather), отримай токен.
 
-2. Встанови залежності:
+2. Скопіюй `.env.example` → `.env` і встав токен:
    ```bash
-   pip install -r requirements.txt
+   cp .env.example .env
+   # Відкрий .env і заміни BOT_TOKEN на реальний
    ```
 
-3. Змінні оточення (або `.env`):
+3. Встанови залежності, заповни БД і запусти бота одним командою:
    ```bash
-   export BOT_TOKEN="..."
-   export DB_PATH="leinerfrog.db"
+   make run
+   ```
+   Або покроково:
+   ```bash
+   pip install -r requirements.txt
+   python seed.py
+   python main.py
    ```
 
 4. (Опційно) Згенеруй 200 жаб з GBIF + Wikipedia:
    ```bash
-   python tools/build_frog_dataset.py
+   python build_frog_dataset.py
    ```
-   Створиться `frog_species_200.json`.
+   Створиться `frog_species_200.json`, який `seed.py` підхопить автоматично.
 
-5. Seed БД (жаби, жарти, події):
-   ```bash
-   python seed.py
-   ```
+### Варіант B: Docker Compose
 
-6. Запуск бота:
-   ```bash
-   python main.py
-   ```
+```bash
+cp .env.example .env   # заповни BOT_TOKEN
+docker compose up -d   # збирає образ і запускає у фоні
+docker compose logs -f # стеж за логами
+```
+
+### Варіант C: Docker (вручну)
+
+```bash
+docker build -t leinerfrog .
+docker run --rm --env-file .env -e DB_PATH=/data/leinerfrog.db \
+    -v leinerfrog-data:/data leinerfrog
+```
+
+## Тестування
+
+```bash
+make test
+# або
+python -m pytest tests/ -v
+```
+
+## Деплой у хмару
+
+- Render / Railway — дивись **DEPLOY.md** / **DEPLOY_SIMPLE.md**.
+- Docker на VPS — дивись **DOCKER.md**.
 
 ## Команди
 
@@ -46,6 +73,7 @@ Telegram-бот на Python 3.11+: aiogram v3, APScheduler, SQLite (aiosqlite).
 | `/protein 80` | Білок на день (2 г/кг) |
 | `/setweight 80` | Встановити вагу для розрахунку води |
 | `/joke` | Марковський жарт |
+| `/fortune` | Передбачення |
 | `/mute` | Вимкнути авто-повідомлення |
 | `/unmute` | Увімкнути авто-повідомлення |
 
@@ -72,7 +100,9 @@ Telegram-бот на Python 3.11+: aiogram v3, APScheduler, SQLite (aiosqlite).
 - `content/frog_texts.py` — тексти пингів  
 - `content/leiner_quotes_ru.py` — репліки за настроєм  
 - `content/markov.py` — MarkovNgram для /joke  
-- `tools/build_frog_dataset.py` — генерація frog_species_200.json (GBIF + Wikipedia)
+- `build_frog_dataset.py` — генерація frog_species_200.json (GBIF + Wikipedia)  
+- `Makefile` — зручні цілі: `install`, `run`, `test`, `docker`, `docker-run`  
+- `docker-compose.yml` — запуск через Docker Compose  
 
 ## База даних
 

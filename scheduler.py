@@ -106,46 +106,52 @@ def build_scheduler(bot: Bot, db: Database) -> AsyncIOScheduler:
     sched = AsyncIOScheduler(timezone="Europe/Kyiv")
 
     sched.add_job(
-        lambda: broadcast_morning(bot, db),
+        broadcast_morning,
         "cron",
         hour=7,
         minute=30,
         id="morning",
+        args=[bot, db],
     )
     sched.add_job(
-        lambda: broadcast_water(bot, db),
+        broadcast_water,
         "cron",
         hour=9,
         minute=0,
         id="water",
+        args=[bot, db],
     )
     sched.add_job(
-        lambda: broadcast_food(bot, db),
+        broadcast_food,
         "cron",
         hour=13,
         minute=0,
         id="food",
+        args=[bot, db],
     )
     sched.add_job(
-        lambda: broadcast_random(bot, db),
+        broadcast_random,
         "cron",
         hour=16,
         minute=0,
         id="random",
+        args=[bot, db],
     )
     sched.add_job(
-        lambda: broadcast_gym(bot, db),
+        broadcast_gym,
         "cron",
         hour=19,
         minute=0,
         id="gym",
+        args=[bot, db],
     )
     sched.add_job(
-        lambda: broadcast_sleep(bot, db),
+        broadcast_sleep,
         "cron",
         hour=22,
         minute=30,
         id="sleep",
+        args=[bot, db],
     )
 
     _first_run = dt.datetime.now(timezone.utc) + dt.timedelta(minutes=1)
@@ -158,10 +164,11 @@ def build_scheduler(bot: Bot, db: Database) -> AsyncIOScheduler:
     )
 
     sched.add_job(
-        lambda: silence_check(bot, db),
+        silence_check,
         "interval",
         hours=12,
         id="frog_silence",
+        args=[bot, db],
     )
 
     return sched
