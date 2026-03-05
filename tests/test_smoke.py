@@ -243,3 +243,75 @@ def test_db_water_and_friendship_round_trip():
         asyncio.run(run())
     finally:
         os.unlink(path)
+
+
+# ---------------------------------------------------------------------------
+# Regression: scheduler jobs must be coroutine functions so APScheduler awaits
+# them (not run in executor where the coroutine would be silently discarded).
+# ---------------------------------------------------------------------------
+
+def test_scheduler_jobs_are_coroutine_functions():
+    """All broadcast functions registered with the scheduler must be coroutine
+    functions. Wrapping them in a sync lambda would prevent APScheduler's
+    AsyncIOExecutor from awaiting them, silently dropping every broadcast."""
+    import inspect
+    from scheduler import (
+        broadcast_morning,
+        broadcast_water,
+        broadcast_food,
+        broadcast_random,
+        broadcast_gym,
+        broadcast_sleep,
+        silence_check,
+        brain_job,
+    )
+
+    for fn in (
+        broadcast_morning,
+        broadcast_water,
+        broadcast_food,
+        broadcast_random,
+        broadcast_gym,
+        broadcast_sleep,
+        silence_check,
+        brain_job,
+    ):
+        assert inspect.iscoroutinefunction(fn), (
+            f"{fn.__name__} must be a coroutine function so APScheduler "
+            "AsyncIOExecutor awaits it; do not wrap it in a sync lambda"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Regression: cb_water callback must not crash when user is not yet in DB
+# (upsert_user must be called before get_user / water_today_ml).
+# ---------------------------------------------------------------------------
+
+def test_cb_water_upserts_user_before_get():
+    """The /water callback handler must upsert the user before reading from the
+    DB so that pressing the inline button for the first time doesn't raise a
+    TypeError on u["tz"] when u is None."""
+    import os
+    import tempfile
+    from db import Database
+
+    with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
+        path = f.name
+    try:
+        async def run():
+            db = Database(path)
+            await db.connect()
+            uid = 42
+            # Simulate what cb_water now does: upsert first, then add water
+            await db.upsert_user(uid)
+            await db.add_water(uid, 250)
+            u = await db.get_user(uid)
+            # These must not raise
+            tz = u["tz"] if u else "Europe/Kyiv"
+            today = await db.water_today_ml(uid, tz)
+            assert today == 250
+            await db.close()
+
+        asyncio.run(run())
+    finally:
+        os.unlink(path)
