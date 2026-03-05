@@ -11,9 +11,18 @@ __pycache__/
 *.py[cod]
 *.pyo
 
-# Node modules (legacy)
+# Node modules and accidentally-committed npm artifacts
 node_modules/
+buffer-alloc-unsafe/
+package-lock.json
+
+# Runtime state files
+frog_states.json
+frog_species_200.json
 
 # IDE
 .idea/
 .vscode/
+
+# pytest cache
+.pytest_cache/
