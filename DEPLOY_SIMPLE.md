@@ -84,6 +84,31 @@ honest-empathy           — No services
 
 ---
 
+## 🔴 Помилка збірки: `connection error: read unix @->/run/docker.sock`
+
+Якщо в логах деплою бачиш щось таке:
+
+```
+ERROR: failed to build: listing workers for Build: failed to list workers:
+Unavailable: connection error: desc = "error reading server preface:
+read unix @->/run/docker.sock: use of closed network connection"
+```
+
+**Це тимчасовий збій інфраструктури Railway (BuildKit), не помилка в коді.**  
+BuildKit-демон Railway втратив з'єднання з Docker-сокетом посередині збірки.
+
+**Що робити:**
+
+1. В панелі сервісу клікни вкладку **Deployments**.
+2. Натисни **Retry** (або **Redeploy**) на останньому невдалому деплої.
+3. Зазвичай другий запуск проходить успішно.
+
+Якщо помилка повторюється кілька разів поспіль — зачекай 5–10 хвилин і спробуй знову (Railway іноді має тимчасові проблеми з регіоном `us-west1`).
+
+> Нічого в репо виправляти не треба — проблема на боці Railway, а не в Dockerfile.
+
+---
+
 1. **Репо на GitHub**  
    Якщо ще немає:
    ```bash

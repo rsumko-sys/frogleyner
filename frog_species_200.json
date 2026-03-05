@@ -400,8 +400,7 @@
     "tags": "tropical,direct"
   },
   {
-    "name_ru": "Гладкая когтистая лягушка",
-    "latin": "Xenopus laevis",
+    "name_ru": "Карликовая когтистая лягушка",
     "latin": "Xenopus tropicalis",
     "habitat_ru": "Западная Африка, тропические реки",
     "fact_ru": "Геном полностью расшифрован; широко используется в генетических исследованиях.",
@@ -538,7 +537,6 @@
   },
   {
     "name_ru": "Дальневосточная жаба",
-    "latin": "Bufo gargarizans",
     "latin": "Bufo sachalinensis",
     "habitat_ru": "Сахалин, Курилы, берега рек",
     "fact_ru": "Один из самых северных видов жаб в мире; адаптирован к коротким летним сезонам.",
@@ -602,8 +600,7 @@
     "tags": "poison,medicine,southamerica"
   },
   {
-    "name_ru": "Лягушка-ресничница",
-    "latin": "Trichobatrachus robustus",
+    "name_ru": "Рогатая лягушка Гюнтера",
     "latin": "Ceratobatrachus guentheri",
     "habitat_ru": "Острова Соломона, тропические леса",
     "fact_ru": "Рожковидные выросты на голове служат маскировкой; прямое развитие — без головастиков.",
@@ -651,8 +648,7 @@
     "tags": "camouflage,borneo"
   },
   {
-    "name_ru": "Пятнистая лягушка-носорог",
-    "latin": "Ceratobatrachus guentheri",
+    "name_ru": "Малая рогатая лягушка",
     "latin": "Megophrys parva",
     "habitat_ru": "Юго-Восточная Азия, горные леса",
     "fact_ru": "Маленький роговой вырост на носу имитирует стебель растения.",
@@ -956,8 +952,7 @@
     "tags": "canary,tree"
   },
   {
-    "name_ru": "Кавказская квакша",
-    "latin": "Hyla schelkownikowi",
+    "name_ru": "Аравийская квакша",
     "latin": "Hyla felixarabica",
     "habitat_ru": "Йемен, горные речные ущелья",
     "fact_ru": "Самая южная квакша Аравийского полуострова; живёт в речных ущельях Тихамы.",
@@ -1037,8 +1032,7 @@
     "tags": "borneo,unusual,lungless"
   },
   {
-    "name_ru": "Парашютная лягушка Уоллеса",
-    "latin": "Rhacophorus reinwardtii",
+    "name_ru": "Пантерная летающая лягушка",
     "latin": "Rhacophorus pardalis",
     "habitat_ru": "Борнео, Суматра и Малайский полуостров",
     "fact_ru": "Кожные перепонки между пальцами рук и ног позволяют скользить между деревьями.",
@@ -1055,7 +1049,6 @@
   },
   {
     "name_ru": "Трёхполосая жаба",
-    "latin": "Bufo trilineatus",
     "latin": "Amietophrynus trilineatus",
     "habitat_ru": "Западная Африка, тропические леса",
     "fact_ru": "Три чёткие кремовые полосы на тёмной спине делают её легко узнаваемой среди африканских жаб.",
@@ -1096,7 +1089,6 @@
   },
   {
     "name_ru": "Индийская жаба",
-    "latin": "Bufo stomaticus",
     "latin": "Duttaphrynus stomaticus",
     "habitat_ru": "Пакистан, Индия, Афганистан, Иран, полупустыни и сады",
     "fact_ru": "Один из наиболее распространённых видов жаб Южной Азии; активна в мусонный сезон.",
@@ -1161,7 +1153,6 @@
   },
   {
     "name_ru": "Кочующая лягушка",
-    "latin": "Noblella sp.",
     "latin": "Pristimantis cruentus",
     "habitat_ru": "Горные леса Коста-Рики и Панамы",
     "fact_ru": "Откладывает яйца в кучу листьев; прямое развитие — вылупливаются лягушата.",

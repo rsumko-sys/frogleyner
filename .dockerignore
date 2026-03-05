@@ -15,9 +15,20 @@
 __pycache__/
 *.py[cod]
 
-# Node.js (not needed for the Python bot image)
+# Node.js artefacts — not needed for the Python bot image
 node_modules/
+buffer-alloc-unsafe/
 npm-debug.log*
+package.json
+package-lock.json
+bot.js
 
-# Docs / CI files not needed at runtime
+# Scripts that only run locally (dataset generation, etc.)
+build_frog_dataset.py
+leinerfrog_bot.py
+
+# Deployment configs for other platforms
+render.yaml
+
+# Docs — not needed at runtime
 *.md
