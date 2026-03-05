@@ -2,6 +2,113 @@
 
 ## Railway — без конфігів, тільки репо + токен
 
+---
+
+## 🆘 Вже бачиш список проєктів і одне "0/1 service online"?
+
+Якщо на твоєму дашборді виглядає так:
+
+```
+robust-kindness          — No services
+superb-benevolence       — No services
+dynamic-recreation       — No services
+diplomatic-gentleness    — production · 0/1 service online   ← ЦЕ ТВІЙ
+honest-empathy           — No services
+```
+
+**→ Клікни на той проєкт, де написано `0/1 service online`** (наприклад `diplomatic-gentleness`).
+
+Це твій проєкт із задеплоєним ботом. Він офлайн тому, що **ще не задано `BOT_TOKEN`** — без нього бот падає одразу при старті.
+
+### Що робити далі (3 кліки):
+
+1. **Клікни на проєкт** `diplomatic-gentleness` (або той, де `0/1 service online`).
+2. На canvas (полотні всередині проєкту) побачиш **картку сервісу** (прямокутник із назвою репо або `frogbot`). **Клікни на картку**.
+3. Відкриється бічна панель із вкладками:
+   ```
+   Deployments  ·  Logs  ·  Variables  ·  Settings
+   ```
+4. Клікни **Variables** → **`+ New Variable`**:
+   - **Name:** `BOT_TOKEN`
+   - **Value:** токен від @BotFather (щось на зразок `7123456789:AAF_abc...`)
+5. Натисни **Add** — Railway перезапустить бота автоматично (~30 сек).
+6. Клікни вкладку **Logs** — маєш побачити:
+   ```
+   === Frog bot: polling started ===
+   ```
+   Якщо це є — бот живий ✅
+
+> **Чому сервіс офлайн?** Код перевіряє `BOT_TOKEN` одразу при старті.  
+> Якщо змінна не задана — бот падає з помилкою `RuntimeError: BOT_TOKEN is not set`.  
+> Щойно додаєш токен — сервіс піднімається.
+
+---
+
+## ✅ Токен додано — що далі?
+
+### 1. Перевір логи (~30 секунд після збереження токена)
+
+У панелі сервісу клікни вкладку **Logs**. Маєш побачити щось таке:
+
+```
+=== Container start ===
+=== Seed OK ===
+=== Frog bot: starting ===
+=== Config loaded (db=leinerfrog.db) ===
+=== DB ready ===
+=== Scheduler started ===
+=== Frog bot: polling started ===
+```
+
+Якщо рядок `polling started` є — бот живий. Напиши йому `/ping` у Telegram, має відповісти `pong 🐸`.
+
+### 2. Зберегти базу даних між деплоями (важливо!)
+
+> ⚠️ **Railway видаляє файли контейнера при кожному рестарті/деплої.**  
+> База даних `leinerfrog.db` зберігається в `/app/leinerfrog.db` всередині контейнера — **без Volume вона скидається при кожному оновленні**.  
+> Це означає: всі дані про воду, рівень дружби та налаштування користувачів зникають.
+
+**Рішення — додай Railway Volume (постійне сховище):**
+
+1. В панелі сервісу клікни вкладку **Settings**.
+2. Прокрути до розділу **Storage** (або **Volumes** / **Persistent Storage**).
+3. Натисни **Add Volume** / **New Volume**:
+   - **Mount Path:** `/data`
+4. Збережи.
+5. Тепер у вкладці **Variables** додай ще одну змінну:
+   - **Name:** `DB_PATH`
+   - **Value:** `/data/leinerfrog.db`
+6. Натисни **Add** — Railway перезапустить сервіс.
+
+Після цього база даних зберігається у `/data/leinerfrog.db` на постійному диску і **не скидається** між деплоями.
+
+---
+
+## 🔴 Помилка збірки: `connection error: read unix @->/run/docker.sock`
+
+Якщо в логах деплою бачиш щось таке:
+
+```
+ERROR: failed to build: listing workers for Build: failed to list workers:
+Unavailable: connection error: desc = "error reading server preface:
+read unix @->/run/docker.sock: use of closed network connection"
+```
+
+**Це тимчасовий збій інфраструктури Railway (BuildKit), не помилка в коді.**  
+BuildKit-демон Railway втратив з'єднання з Docker-сокетом посередині збірки.
+
+**Що робити:**
+
+1. В панелі сервісу клікни вкладку **Deployments**.
+2. Натисни **Retry** (або **Redeploy**) на останньому невдалому деплої.
+3. Зазвичай другий запуск проходить успішно.
+
+Якщо помилка повторюється кілька разів поспіль — зачекай 5–10 хвилин і спробуй знову (Railway іноді має тимчасові проблеми з регіоном `us-west1`).
+
+> Нічого в репо виправляти не треба — проблема на боці Railway, а не в Dockerfile.
+
+---
+
 1. **Репо на GitHub**  
    Якщо ще немає:
    ```bash
@@ -21,14 +128,28 @@
    - Зайди на [railway.app](https://railway.app), увійди через GitHub.
    - **New Project** → **Deploy from GitHub repo** → вибери репо `frogbot`.
 
-3. **Змінні**  
-   У проєкті відкрий сервіс → вкладка **Variables** → **Add Variable**:
-   - `BOT_TOKEN` = токен від @BotFather  
-   Збережи (деплой піде автоматично).
+3. **Де знайти Variables (BOT_TOKEN)**
 
-4. **Команда запуску**  
-   Вкладка **Settings** → **Deploy**:
-   - **Start Command:** `python seed.py && python main.py`  
+   > ⚠️ **Важливо:** Variables — це НЕ в меню зліва і не в Project Settings.  
+   > Вона всередині самого сервісу, по центру сторінки.
+
+   Точний маршрут:
+   1. Відкрий свій проєкт на [railway.app](https://railway.app/dashboard).
+   2. На canvas (полотні) побачиш картку сервісу (наприклад `frogbot`). **Клікни на неї**.
+   3. Відкриється панель сервісу з вкладками вгорі:  
+      `Deployments` · `Logs` · **`Variables`** · `Settings`
+   4. Клікни **Variables**.
+   5. Клікни **`+ New Variable`** (або **`Raw Editor`** для швидкого вставлення).
+   6. Заповни:
+      - **Name:** `BOT_TOKEN`
+      - **Value:** токен від @BotFather (виглядає як `123456789:AAF...`)
+   7. Натисни **Add** → Railway автоматично перезапустить деплой.
+
+   ✅ Якщо вкладки не видно — переконайся, що ти клікнув саме **на картку сервісу**, а не на фон проєкту.
+
+4. **Команда запуску (Start Command)**  
+   Вкладка **Settings** (в тій же панелі сервісу) → розділ **Deploy**:
+   - **Start Command:** `python main.py`  
    Збережи. Railway перезадеплоїть бота.
 
 5. Готово. Бот працює 24/7. Логи — вкладка **Deployments** → **View Logs**.

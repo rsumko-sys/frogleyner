@@ -1,0 +1,34 @@
+# Never copy secrets into the image
+.env
+.env.*
+
+# Git history not needed inside the container
+.git
+.gitignore
+
+# SQLite databases — created fresh at runtime by seed.py
+*.db
+*.db-shm
+*.db-wal
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Node.js artefacts — not needed for the Python bot image
+node_modules/
+buffer-alloc-unsafe/
+npm-debug.log*
+package.json
+package-lock.json
+bot.js
+
+# Scripts that only run locally (dataset generation, etc.)
+build_frog_dataset.py
+leinerfrog_bot.py
+
+# Deployment configs for other platforms
+render.yaml
+
+# Docs — not needed at runtime
+*.md

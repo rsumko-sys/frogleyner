@@ -35,10 +35,13 @@ class DbMiddleware(BaseMiddleware):
 
 
 async def main():
+    print("=== Frog bot: starting ===", flush=True)
     cfg = load_config()
+    print(f"=== Config loaded (db={cfg.db_path}) ===", flush=True)
     db = Database(cfg.db_path)
     await db.connect()
     await seed_db(cfg.db_path)
+    print("=== DB ready ===", flush=True)
 
     bot = Bot(
         token=cfg.bot_token,
@@ -50,6 +53,7 @@ async def main():
 
     sched = build_scheduler(bot, db)
     sched.start()
+    print("=== Scheduler started ===", flush=True)
 
     commands_ru = [
         BotCommand(command="start", description="Запустить бота"),
@@ -71,8 +75,9 @@ async def main():
     ]
     await bot.set_my_commands(commands_ru)
 
-    # Якщо десь був webhook — знімаємо, щоб оновлення йшли в polling
+    # Remove any existing webhook so updates come via polling
     await bot.delete_webhook(drop_pending_updates=True)
+    print("=== Frog bot: polling started ===", flush=True)
 
     try:
         await dp.start_polling(bot)
@@ -83,4 +88,10 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except Exception as e:
+        import traceback
+        print(f"=== Frog bot CRASH: {e} ===", flush=True)
+        traceback.print_exc()
+        raise

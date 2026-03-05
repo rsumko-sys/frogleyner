@@ -1,0 +1,32 @@
+# Environment variables — NEVER commit your token
+.env
+.env.local
+.env.*.local
+
+# SQLite database files (reset on each deploy anyway)
+*.db
+*.db-shm
+*.db-wal
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
