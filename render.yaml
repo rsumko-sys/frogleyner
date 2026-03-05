@@ -12,4 +12,8 @@ services:
       - key: BOT_TOKEN
         sync: false
       - key: DB_PATH
-        value: leinerfrog.db
+        value: /data/leinerfrog.db
+    disk:
+      name: frogleyner-data
+      mountPath: /data
+      sizeGB: 1

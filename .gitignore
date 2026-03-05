@@ -1,0 +1,19 @@
+# Environment variables (never commit real tokens)
+.env
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Node modules (legacy)
+node_modules/
+
+# IDE
+.idea/
+.vscode/
