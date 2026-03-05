@@ -9,11 +9,11 @@
 1. **Репо на GitHub**  
    Залей проєкт у репозиторій (якщо ще не зробив):
    ```bash
-   cd /Users/admin/frogbot
+   cd frogleyner
    git init
    git add .
    git commit -m "LeinerFrog bot"
-   git remote add origin https://github.com/TVІЙ_LOGIN/frogbot.git
+   git remote add origin https://github.com/YOUR_USERNAME/frogleyner.git
    git push -u origin main
    ```
    Можна створити репо на github.com і підставити свій URL.
