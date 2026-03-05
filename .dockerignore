@@ -1,0 +1,23 @@
+# Never copy secrets into the image
+.env
+.env.*
+
+# Git history not needed inside the container
+.git
+.gitignore
+
+# SQLite databases — created fresh at runtime by seed.py
+*.db
+*.db-shm
+*.db-wal
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Node.js (not needed for the Python bot image)
+node_modules/
+npm-debug.log*
+
+# Docs / CI files not needed at runtime
+*.md
