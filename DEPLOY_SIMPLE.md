@@ -2,6 +2,48 @@
 
 ## Railway — без конфігів, тільки репо + токен
 
+---
+
+## 🆘 Вже бачиш список проєктів і одне "0/1 service online"?
+
+Якщо на твоєму дашборді виглядає так:
+
+```
+robust-kindness          — No services
+superb-benevolence       — No services
+dynamic-recreation       — No services
+diplomatic-gentleness    — production · 0/1 service online   ← ЦЕ ТВІЙ
+honest-empathy           — No services
+```
+
+**→ Клікни на той проєкт, де написано `0/1 service online`** (наприклад `diplomatic-gentleness`).
+
+Це твій проєкт із задеплоєним ботом. Він офлайн тому, що **ще не задано `BOT_TOKEN`** — без нього бот падає одразу при старті.
+
+### Що робити далі (3 кліки):
+
+1. **Клікни на проєкт** `diplomatic-gentleness` (або той, де `0/1 service online`).
+2. На canvas (полотні всередині проєкту) побачиш **картку сервісу** (прямокутник із назвою репо або `frogbot`). **Клікни на картку**.
+3. Відкриється бічна панель із вкладками:
+   ```
+   Deployments  ·  Logs  ·  Variables  ·  Settings
+   ```
+4. Клікни **Variables** → **`+ New Variable`**:
+   - **Name:** `BOT_TOKEN`
+   - **Value:** токен від @BotFather (щось на зразок `7123456789:AAF_abc...`)
+5. Натисни **Add** — Railway перезапустить бота автоматично (~30 сек).
+6. Клікни вкладку **Logs** — маєш побачити:
+   ```
+   === Frog bot: polling started ===
+   ```
+   Якщо це є — бот живий ✅
+
+> **Чому сервіс офлайн?** Код перевіряє `BOT_TOKEN` одразу при старті.  
+> Якщо змінна не задана — бот падає з помилкою `RuntimeError: BOT_TOKEN is not set`.  
+> Щойно додаєш токен — сервіс піднімається.
+
+---
+
 1. **Репо на GitHub**  
    Якщо ще немає:
    ```bash
