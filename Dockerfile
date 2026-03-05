@@ -5,4 +5,4 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
-CMD ["sh", "-c", "python seed.py && python main.py"]
+CMD ["sh", "-c", "echo '=== Container start ===' && python seed.py && echo '=== Seed OK ===' && exec python main.py"]
