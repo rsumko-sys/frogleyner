@@ -1,0 +1,21 @@
+.env
+.env.*
+*.db
+*.db-shm
+*.db-wal
+__pycache__/
+*.py[cod]
+.Python
+venv/
+.venv/
+frog_species_200.json
+node_modules/
+*.pyc
+buffer-alloc-unsafe/
+# VSCode
+.vscode/
+# OS
+.DS_Store
+# Test
+htmlcov/
+.coverage

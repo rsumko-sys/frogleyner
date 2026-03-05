@@ -1,0 +1,15 @@
+# Render Blueprint — Жаба Лейнера (Background Worker 24/7)
+# Деплой: Dashboard → New → Blueprint → підключи репо, вкажи цей файл.
+# В Environment додай BOT_TOKEN (Secret).
+
+services:
+  - type: worker
+    runtime: python
+    name: leinerfrog-bot
+    buildCommand: pip install -r requirements.txt
+    startCommand: python seed.py && python main.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DB_PATH
+        value: leinerfrog.db
