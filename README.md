@@ -11,15 +11,15 @@ Telegram-бот на Python 3.11+: aiogram v3, APScheduler, SQLite (aiosqlite).
    pip install -r requirements.txt
    ```
 
-3. Змінні оточення (або `.env`):
+3. Скопіюй `.env.example` → `.env` і встав токен:
    ```bash
-   export BOT_TOKEN="..."
-   export DB_PATH="leinerfrog.db"
+   cp .env.example .env
+   # Відкрий .env і заміни BOT_TOKEN на реальний
    ```
 
 4. (Опційно) Згенеруй 200 жаб з GBIF + Wikipedia:
    ```bash
-   python tools/build_frog_dataset.py
+   python build_frog_dataset.py
    ```
    Створиться `frog_species_200.json`.
 
@@ -32,6 +32,13 @@ Telegram-бот на Python 3.11+: aiogram v3, APScheduler, SQLite (aiosqlite).
    ```bash
    python main.py
    ```
+
+## Тестування
+
+```bash
+pip install pytest
+python -m pytest tests/ -v
+```
 
 ## Команди
 
