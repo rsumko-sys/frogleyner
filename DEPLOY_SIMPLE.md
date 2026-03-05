@@ -21,14 +21,28 @@
    - Зайди на [railway.app](https://railway.app), увійди через GitHub.
    - **New Project** → **Deploy from GitHub repo** → вибери репо `frogbot`.
 
-3. **Змінні**  
-   У проєкті відкрий сервіс → вкладка **Variables** → **Add Variable**:
-   - `BOT_TOKEN` = токен від @BotFather  
-   Збережи (деплой піде автоматично).
+3. **Де знайти Variables (BOT_TOKEN)**
 
-4. **Команда запуску**  
-   Вкладка **Settings** → **Deploy**:
-   - **Start Command:** `python seed.py && python main.py`  
+   > ⚠️ **Важливо:** Variables — це НЕ в меню зліва і не в Project Settings.  
+   > Вона всередині самого сервісу, по центру сторінки.
+
+   Точний маршрут:
+   1. Відкрий свій проєкт на [railway.app](https://railway.app/dashboard).
+   2. На canvas (полотні) побачиш картку сервісу (наприклад `frogbot`). **Клікни на неї**.
+   3. Відкриється панель сервісу з вкладками вгорі:  
+      `Deployments` · `Logs` · **`Variables`** · `Settings`
+   4. Клікни **Variables**.
+   5. Клікни **`+ New Variable`** (або **`Raw Editor`** для швидкого вставлення).
+   6. Заповни:
+      - **Name:** `BOT_TOKEN`
+      - **Value:** токен від @BotFather (виглядає як `123456789:AAF...`)
+   7. Натисни **Add** → Railway автоматично перезапустить деплой.
+
+   ✅ Якщо вкладки не видно — переконайся, що ти клікнув саме **на картку сервісу**, а не на фон проєкту.
+
+4. **Команда запуску (Start Command)**  
+   Вкладка **Settings** (в тій же панелі сервісу) → розділ **Deploy**:
+   - **Start Command:** `python main.py`  
    Збережи. Railway перезадеплоїть бота.
 
 5. Готово. Бот працює 24/7. Логи — вкладка **Deployments** → **View Logs**.
