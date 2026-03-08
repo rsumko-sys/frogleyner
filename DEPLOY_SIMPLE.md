@@ -1,4 +1,3 @@
-
 # Найпростіший деплой (5 хвилин)
 
 ## Railway — без конфігів, тільки репо + токен
@@ -22,37 +21,17 @@
    - Зайди на [railway.app](https://railway.app), увійди через GitHub.
    - **New Project** → **Deploy from GitHub repo** → вибери репо `frogbot`.
 
-
 3. **Змінні**  
-   Знайди правильний Railway-проєкт (той, де 0/1 service online — це твій бот).
-   Відкрий сервіс (натисни на прямокутник/box на canvas).
-   Перейди у вкладку **Variables** → **Add Variable**:
-   - Name: `BOT_TOKEN`
-   - Value: твій токен від @BotFather
-   Натисни Add — Railway автоматично перезапустить сервіс (~30 секунд).
+   У проєкті відкрий сервіс → вкладка **Variables** → **Add Variable**:
+   - `BOT_TOKEN` = токен від @BotFather  
+   Збережи (деплой піде автоматично).
 
-4. **Перевірка**
-   Перейди у вкладку **Logs** (або **Deployments** → **View Logs**).
-   Якщо бачиш `=== Frog bot: polling started ===`, бот працює ✅
-
-5. **Збереження бази даних**
-   Файлова система Railway тимчасова — SQLite база видаляється при кожному рестарті/деплої.
-   Щоб зберегти дані:
-   - Відкрий сервіс → вкладка **Settings**
-   - Прокрути до **Storage / Volumes**
-   - **Add Volume** → Mount Path: `/data` → Save
-   - Перейди у вкладку **Variables** → **Add Variable**:
-     - Name: `DB_PATH`
-     - Value: `/data/leinerfrog.db`
-   - Натисни Add — Railway перезапустить сервіс, і база буде збережена 💾
-
-
-6. **Команда запуску**  
+4. **Команда запуску**  
    Вкладка **Settings** → **Deploy**:
    - **Start Command:** `python seed.py && python main.py`  
    Збережи. Railway перезадеплоїть бота.
 
-7. Готово. Бот працює 24/7. Логи — вкладка **Deployments** → **View Logs**.
+5. Готово. Бот працює 24/7. Логи — вкладка **Deployments** → **View Logs**.
 
 ---
 

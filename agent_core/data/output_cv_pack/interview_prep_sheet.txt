@@ -1,0 +1,59 @@
+POSITIONING
+I am a field operations and liaison person with real conflict-zone experience, strong coordination skills, and enough applied technical literacy to support deployment, validation, and user feedback loops.
+
+CORE MESSAGE
+I reduce the gap between field reality and team assumptions.
+
+WHAT I AM
+- field operations / coordination
+- military / user liaison
+- deployment / integration support
+- field validation / feedback collection
+- practical operator in unstable environments
+- applied technical support / rapid prototyping layer
+
+WHAT I AM NOT
+- not a founder
+- not a senior defense engineer
+- not a weapons designer
+- not a battlefield systems architect
+- not pretending to be a pure software engineer
+
+TOP ANSWERS
+Tell me about yourself.
+I come from a long production and field operations background. Since 2022, I have worked in conflict-zone conditions in Ukraine, coordinating movements, logistics, access, field execution, and communication between different stakeholders. In parallel, I also build lightweight practical tools when needed. My value is in connecting field reality, user needs, and execution.
+
+Why this role?
+Because this is where my experience is directly useful. I understand real conditions, user friction, deployment constraints, and how to help a team adapt a product or workflow to reality.
+
+Why should we hire you?
+Because I can help your team avoid the gap between internal assumptions and real-world use. I can support field deployment, gather usable feedback, and improve coordination with actual users.
+
+What is your biggest strength?
+Operational adaptability under pressure. I can enter messy conditions, identify the real bottleneck, keep communication clean, and move execution forward.
+
+What are your technical limits?
+I am not a deep engineer. My technical value is applied: lightweight tools, workflow support, coordinate handling, parsing, and practical prototyping driven by user needs.
+
+How do you handle sensitive information?
+Need-to-know basis. I avoid unnecessary specifics and treat information discipline as part of operational hygiene.
+
+PHRASES TO REPEAT
+- real operating conditions
+- user needs
+- deployment constraints
+- structured feedback
+- practical execution
+- operational friction
+- fast adaptation
+- cross-functional communication
+
+WHAT TO AVOID
+- heroic war stories
+- unit names
+- tactical details
+- exaggerated miltech claims
+- sounding like you are applying to be CEO of NATO
+
+BEST CLOSING LINE
+I am most useful where a company needs someone who can take a product or workflow into reality, understand why it works or fails there, and help the team adjust fast and intelligently.

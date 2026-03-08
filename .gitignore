@@ -12,10 +12,3 @@ frog_species_200.json
 node_modules/
 *.pyc
 buffer-alloc-unsafe/
-# VSCode
-.vscode/
-# OS
-.DS_Store
-# Test
-htmlcov/
-.coverage

@@ -7,9 +7,6 @@ from aiogram.exceptions import TelegramForbiddenError
 
 from db import Database
 from content.frog_texts import pick, RANDOM_THOUGHTS
-from content.frog_facts_200 import FACTS_200 as FROG_FACTS
-from content.frog_jokes_200 import JOKES_200 as FROG_JOKES
-
 from content.leiner_quotes_ru import (
     PHILO,
     CHAOS,
@@ -21,12 +18,6 @@ from content.leiner_quotes_ru import (
     MICRO,
     ONE_WORD,
 )
-
-def frog_fact():
-    return random.choice(FROG_FACTS)
-
-def frog_joke():
-    return random.choice(FROG_JOKES)
 
 
 def _days_since(iso_ts: str) -> int:
