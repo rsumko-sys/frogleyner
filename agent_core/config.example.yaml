@@ -1,0 +1,68 @@
+# Приклад конфігу агента приватності (скопіюйте в config.yaml і змініть під себе)
+
+jurisdiction_profile:
+  id: "ua_eu_mixed"
+  primary_law: "UA"
+  applies_gdpr: true
+  ccpa_applicable: false
+  deadlines:
+    access_request_days: 30
+    erasure_request_days: 30
+    gdpr_access_days: 30
+    gdpr_extension_days: 60
+
+execution_mode: "human_in_the_loop"  # dry_run | human_in_the_loop | auto
+hr_mode: "summary_package"           # none | summary_package | full_audit_package
+
+platforms:
+  facebook:
+    enabled: true
+    automation_level: "api_plus_safe_ui"  # api_only | api_plus_safe_ui | manual_only
+    known_accounts:
+      - profile_url: "https://facebook.com/your.profile"
+        email: "you@example.com"
+    scopes:
+      inventory: true
+      privacy_tuning: true
+      deletion: false
+
+  linkedin:
+    enabled: true
+    automation_level: "manual_only"
+    known_accounts:
+      - profile_url: "https://www.linkedin.com/in/your-profile"
+    scopes:
+      inventory: true
+      privacy_tuning: true
+      deletion: false
+
+  x:
+    enabled: false
+
+osint:
+  enabled: true
+  max_results_per_query: 50
+  allowed_identifiers:
+    - "full_name"
+    - "known_usernames"
+  disallowed_identifiers:
+    - "phone"
+    - "government_id"
+
+privacy_baseline:
+  general:
+    searchable_by_engines: false
+    show_email: false
+    show_phone: false
+    posts_visibility: "followers"  # public | followers | friends | private
+  platform_overrides:
+    linkedin:
+      public_profile_enabled: false
+    x:
+      protected_posts: true
+
+risk_thresholds:
+  auto_mode:
+    max_risk_level: "low"
+  human_in_the_loop:
+    max_risk_level: "medium"
