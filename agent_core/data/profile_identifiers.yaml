@@ -1,0 +1,16 @@
+# Ідентифікатори профілю для агента приватності (дані для аналізу).
+# Джерело: cv_pack_exporter.PROFILE. Використовується для known_accounts та OSINT.
+# Оновлюйте після змін у cv_pack_exporter.py.
+
+full_name: "ROMAN SUMKO"
+location: "Kyiv, Ukraine"
+email: "rsumko@gmail.com"
+phone: "+380 96 586 8873"
+signal: "gnz_trx_2026.25"
+
+# Для known_accounts у config.yaml — підставте реальний URL після додавання.
+linkedin_profile_url: "[ADD LINK]"
+website: "[OPTIONAL]"
+
+# Рекомендовані allowed_identifiers для osint (без phone за замовчуванням — мінімізація).
+# allowed_identifiers: [ "full_name", "known_usernames" ]

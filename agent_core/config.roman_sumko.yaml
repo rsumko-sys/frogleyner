@@ -1,0 +1,60 @@
+# Конфіг агента приватності на основі даних для аналізу (profile_identifiers + cv_pack).
+# Ідентифікатори з data/profile_identifiers.yaml / cv_pack_exporter.PROFILE.
+
+jurisdiction_profile:
+  id: "ua_eu_mixed"
+  primary_law: "UA"
+  applies_gdpr: true
+  ccpa_applicable: false
+  deadlines:
+    access_request_days: 30
+    erasure_request_days: 30
+    gdpr_access_days: 30
+    gdpr_extension_days: 60
+
+execution_mode: "human_in_the_loop"
+hr_mode: "summary_package"
+
+platforms:
+  linkedin:
+    enabled: true
+    automation_level: "manual_only"
+    known_accounts:
+      - profile_url: "[ADD LINK]"   # підставити з profile_identifiers / PROFILE
+        email: "rsumko@gmail.com"
+    scopes:
+      inventory: true
+      privacy_tuning: true
+      deletion: false
+
+  facebook:
+    enabled: false
+
+  x:
+    enabled: false
+
+osint:
+  enabled: true
+  max_results_per_query: 50
+  allowed_identifiers:
+    - "full_name"
+    - "known_usernames"
+  disallowed_identifiers:
+    - "phone"
+    - "government_id"
+
+privacy_baseline:
+  general:
+    searchable_by_engines: false
+    show_email: false
+    show_phone: false
+    posts_visibility: "followers"
+  platform_overrides:
+    linkedin:
+      public_profile_enabled: false
+
+risk_thresholds:
+  auto_mode:
+    max_risk_level: "low"
+  human_in_the_loop:
+    max_risk_level: "medium"
